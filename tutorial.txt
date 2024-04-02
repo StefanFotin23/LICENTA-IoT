@@ -1,0 +1,4 @@
+Comenzi utile:
+
+docker compose start mytb
+docker compose stop mytb
