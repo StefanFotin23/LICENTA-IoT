@@ -170,8 +170,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 970,
-        "y": 120,
+        "x": 1010,
+        "y": 380,
         "wires": [
             [
                 "25fe5a10e9004d52"
@@ -190,8 +190,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1220,
-        "y": 120,
+        "x": 1260,
+        "y": 380,
         "wires": []
     },
     {
@@ -227,7 +227,8 @@
         "y": 120,
         "wires": [
             [
-                "0d49be8d17bb1328"
+                "0d49be8d17bb1328",
+                "24be6ead0b36b68d"
             ]
         ]
     },
@@ -271,46 +272,6 @@
         ]
     },
     {
-        "id": "5abc062bd5efc483",
-        "type": "http request",
-        "z": "af2032c9eba36021",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 970,
-        "y": 340,
-        "wires": [
-            [
-                "cc8b11a3275802b0"
-            ]
-        ]
-    },
-    {
-        "id": "cc8b11a3275802b0",
-        "type": "debug",
-        "z": "af2032c9eba36021",
-        "name": "debug 4",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 340,
-        "wires": []
-    },
-    {
         "id": "33e1aaf1e8257425",
         "type": "debug",
         "z": "af2032c9eba36021",
@@ -343,7 +304,8 @@
         "y": 340,
         "wires": [
             [
-                "8fe4292a3e79d3e0"
+                "8fe4292a3e79d3e0",
+                "24be6ead0b36b68d"
             ]
         ]
     },
@@ -387,44 +349,6 @@
         ]
     },
     {
-        "id": "6090ad6bb58bdcb6",
-        "type": "http request",
-        "z": "af2032c9eba36021",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": false,
-        "url": "",
-        "persist": false,
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 970,
-        "y": 560,
-        "wires": [
-            [
-                "f6d2b85b67c51e36"
-            ]
-        ]
-    },
-    {
-        "id": "f6d2b85b67c51e36",
-        "type": "debug",
-        "z": "af2032c9eba36021",
-        "name": "debug 7",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 560,
-        "wires": []
-    },
-    {
         "id": "442fc1998bd275a0",
         "type": "debug",
         "z": "af2032c9eba36021",
@@ -457,7 +381,8 @@
         "y": 560,
         "wires": [
             [
-                "ad2723eaf08c5864"
+                "ad2723eaf08c5864",
+                "24be6ead0b36b68d"
             ]
         ]
     },
@@ -501,44 +426,6 @@
         ]
     },
     {
-        "id": "5d2333e9592960dd",
-        "type": "http request",
-        "z": "af2032c9eba36021",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": false,
-        "url": "",
-        "persist": false,
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 970,
-        "y": 780,
-        "wires": [
-            [
-                "f076ad6a38e91c94"
-            ]
-        ]
-    },
-    {
-        "id": "f076ad6a38e91c94",
-        "type": "debug",
-        "z": "af2032c9eba36021",
-        "name": "debug 10",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 780,
-        "wires": []
-    },
-    {
         "id": "bbcca26c68f9ca4b",
         "type": "debug",
         "z": "af2032c9eba36021",
@@ -571,7 +458,8 @@
         "y": 780,
         "wires": [
             [
-                "67f027761ec6fa44"
+                "67f027761ec6fa44",
+                "24be6ead0b36b68d"
             ]
         ]
     },
@@ -590,6 +478,42 @@
         "statusType": "auto",
         "x": 550,
         "y": 720,
+        "wires": []
+    },
+    {
+        "id": "24be6ead0b36b68d",
+        "type": "function",
+        "z": "af2032c9eba36021",
+        "name": "function 1",
+        "func": "// Retrieve deviceSet from context or create a new Set if it doesn't exist\nvar deviceSet = context.get('deviceSet') || new Set();\n\n// Add device_id to the Set\ndeviceSet.add(msg.payload.device_id);\n\n// Update msg.payload with the current set\nmsg.payload = Array.from(deviceSet);\n\n// Save deviceSet back to context\ncontext.set('deviceSet', deviceSet);\n\n// Pass the message along\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 120,
+        "wires": [
+            [
+                "89d52bc3a86e1d1b"
+            ]
+        ]
+    },
+    {
+        "id": "89d52bc3a86e1d1b",
+        "type": "debug",
+        "z": "af2032c9eba36021",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 120,
         "wires": []
     }
 ]

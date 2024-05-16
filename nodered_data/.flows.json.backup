@@ -170,8 +170,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 970,
-        "y": 120,
+        "x": 1010,
+        "y": 380,
         "wires": [
             [
                 "25fe5a10e9004d52"
@@ -190,8 +190,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1220,
-        "y": 120,
+        "x": 1260,
+        "y": 380,
         "wires": []
     },
     {
@@ -227,7 +227,8 @@
         "y": 120,
         "wires": [
             [
-                "0d49be8d17bb1328"
+                "0d49be8d17bb1328",
+                "24be6ead0b36b68d"
             ]
         ]
     },
@@ -271,46 +272,6 @@
         ]
     },
     {
-        "id": "5abc062bd5efc483",
-        "type": "http request",
-        "z": "af2032c9eba36021",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 970,
-        "y": 340,
-        "wires": [
-            [
-                "cc8b11a3275802b0"
-            ]
-        ]
-    },
-    {
-        "id": "cc8b11a3275802b0",
-        "type": "debug",
-        "z": "af2032c9eba36021",
-        "name": "debug 4",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 340,
-        "wires": []
-    },
-    {
         "id": "33e1aaf1e8257425",
         "type": "debug",
         "z": "af2032c9eba36021",
@@ -343,7 +304,8 @@
         "y": 340,
         "wires": [
             [
-                "8fe4292a3e79d3e0"
+                "8fe4292a3e79d3e0",
+                "24be6ead0b36b68d"
             ]
         ]
     },
@@ -387,44 +349,6 @@
         ]
     },
     {
-        "id": "6090ad6bb58bdcb6",
-        "type": "http request",
-        "z": "af2032c9eba36021",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": false,
-        "url": "",
-        "persist": false,
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 970,
-        "y": 560,
-        "wires": [
-            [
-                "f6d2b85b67c51e36"
-            ]
-        ]
-    },
-    {
-        "id": "f6d2b85b67c51e36",
-        "type": "debug",
-        "z": "af2032c9eba36021",
-        "name": "debug 7",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 560,
-        "wires": []
-    },
-    {
         "id": "442fc1998bd275a0",
         "type": "debug",
         "z": "af2032c9eba36021",
@@ -457,7 +381,8 @@
         "y": 560,
         "wires": [
             [
-                "ad2723eaf08c5864"
+                "ad2723eaf08c5864",
+                "24be6ead0b36b68d"
             ]
         ]
     },
@@ -501,44 +426,6 @@
         ]
     },
     {
-        "id": "5d2333e9592960dd",
-        "type": "http request",
-        "z": "af2032c9eba36021",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": false,
-        "url": "",
-        "persist": false,
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 970,
-        "y": 780,
-        "wires": [
-            [
-                "f076ad6a38e91c94"
-            ]
-        ]
-    },
-    {
-        "id": "f076ad6a38e91c94",
-        "type": "debug",
-        "z": "af2032c9eba36021",
-        "name": "debug 10",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 780,
-        "wires": []
-    },
-    {
         "id": "bbcca26c68f9ca4b",
         "type": "debug",
         "z": "af2032c9eba36021",
@@ -560,7 +447,7 @@
         "type": "function",
         "z": "af2032c9eba36021",
         "name": "smartparking-decoder",
-        "func": "function decode_smart_parking(payload, base) {\n    const buff = Buffer.from(payload, base)\n    const first_nibble_bin = ((buff[0] & 0xF0) >> 4).toString(2).padStart(4, '0')\n    let header_data = {\n        'parking_slot_status': Number(first_nibble_bin[0]),\n        'battery_state': Number(first_nibble_bin[1]),\n        'ack': Number(first_nibble_bin[2]),\n        'recalibration': Number(first_nibble_bin[3]),\n        'frame_type': (buff[0] & 0x0F),\n        'sequence': buff.readUint8(1),\n    }\n\n    let frame_data;\n\n    switch (header_data['frame_type']) {\n        case 0:\n            frame_data = {\n                'radar_error': buff.readUint8(2),\n                'temperature': buff.readInt8(3),\n                'timestamp_hh': buff.readInt8(4),\n                'timestamp_mm': buff.readUint8(5),\n                'd1': buff.readUint16BE(6),\n                'a1': buff.readUint16BE(8),\n                'n_reflections': buff.readUint8(10)\n            }\n            break;\n        case 1:\n        case 7:\n            frame_data = {\n                'radar_error': buff.readUint8(2),\n                'temperature': buff.readInt8(3),\n                'timestamp_hh': buff.readUint8(4),\n                'timestamp_mm': buff.readUint8(5),\n                'd1': buff.readUint16BE(6),\n                'a1': buff.readUint16BE(8),\n                'battery_raw': buff.readUint8(10),\n                'battery': buff.readUint8(10) * 4 + 2800,\n            }\n            break\n        case 4:\n            frame_data = {\n                'firmware_version': buff.readUint8(2),\n                'battery_raw': buff.readUint8(3),\n                'battery': buff.readUint8(3) * 4 + 2800,\n                'radar_threshold': buff.readUint8(4),\n                'radar_range_start': buff.readUint8(5),\n                'radar_range_length': buff.readUint8(6),\n            }\n            break;\n        case 5:\n            frame_data = {\n                'time_sleep_min': buff.readUint8(2),\n                'time_sleep_secs': buff.readUint8(3),\n                'time_keep_alive': buff.readUint8(4),\n                'nm_mode': buff.readUint8(5),\n                'nm_start_hour': buff.readUint8(6),\n                'nm_duration': buff.readUint8(7),\n                'nm_sleep_time': buff.readUint8(8),\n                'nm_keep_alive': buff.readUint8(9),\n            }\n            break;\n        case 2:\n            frame_data = {\n                'flag_rtc': buff.readUint8(4)\n            }\n    }\n\n    if (header_data['frame_type'] === 4 || header_data['frame_type'] === 5) {\n        header_data['parking_slot_status'] = null;\n    }\n\n    return {\n        'header_data': header_data,\n        'frame_data': frame_data\n    }\n}\n\nvar device_id = msg.payload.end_device_ids.device_id;\nvar data = msg.payload.uplink_message.frm_payload;\n\nmsg.payload = decode_smart_parking(data, 'base64');\n\nmsg.payload = {\n    device_id,\n    ...msg.payload\n}\n\nreturn msg;",
+        "func": "function decode_smart_parking(payload, base) {\n    const buff = Buffer.from(payload, base)\n    const first_nibble_bin = ((buff[0] & 0xF0) >> 4).toString(2).padStart(4, '0')\n    let header_data = {\n        'parking_slot_status': Number(first_nibble_bin[0]),\n        'battery_state': Number(first_nibble_bin[1]),\n        'ack': Number(first_nibble_bin[2]),\n        'recalibration': Number(first_nibble_bin[3]),\n        'frame_type': (buff[0] & 0x0F),\n        'sequence': buff.readUint8(1),\n    }\n\n    let frame_data;\n\n    switch (header_data['frame_type']) {\n        case 0:\n            frame_data = {\n                'radar_error': buff.readUint8(2),\n                'temperature': buff.readInt8(3),\n                'timestamp_hh': buff.readInt8(4),\n                'timestamp_mm': buff.readUint8(5),\n                'd1': buff.readUint16BE(6),\n                'a1': buff.readUint16BE(8),\n                'n_reflections': buff.readUint8(10)\n            }\n            break;\n        case 1:\n        case 7:\n            frame_data = {\n                'radar_error': buff.readUint8(2),\n                'temperature': buff.readInt8(3),\n                'timestamp_hh': buff.readUint8(4),\n                'timestamp_mm': buff.readUint8(5),\n                'd1': buff.readUint16BE(6),\n                'a1': buff.readUint16BE(8),\n                'battery_raw': buff.readUint8(10),\n                'battery': buff.readUint8(10) * 4 + 2800,\n            }\n            break\n        case 4:\n            frame_data = {\n                'firmware_version': buff.readUint8(2),\n                'battery_raw': buff.readUint8(3),\n                'battery': buff.readUint8(3) * 4 + 2800,\n                'radar_threshold': buff.readUint8(4),\n                'radar_range_start': buff.readUint8(5),\n                'radar_range_length': buff.readUint8(6),\n            }\n            break;\n        case 5:\n            frame_data = {\n                'time_sleep_min': buff.readUint8(2),\n                'time_sleep_secs': buff.readUint8(3),\n                'time_keep_alive': buff.readUint8(4),\n                'nm_mode': buff.readUint8(5),\n                'nm_start_hour': buff.readUint8(6),\n                'nm_duration': buff.readUint8(7),\n                'nm_sleep_time': buff.readUint8(8),\n                'nm_keep_alive': buff.readUint8(9),\n            }\n            break;\n        case 2:\n            frame_data = {\n                'flag_rtc': buff.readUint8(4)\n            }\n    }\n\n    if (header_data['frame_type'] === 4 || header_data['frame_type'] === 5) {\n        header_data['parking_slot_status'] = null;\n    }\n\n    return {\n        'header_data': header_data,\n        'frame_data': frame_data\n    }\n}\n\n// Get decoded data\nvar data = msg.payload.uplink_message.frm_payload;\nmsg.payload = decode_smart_parking(data, 'base64');\n\n// Get device_id\nvar topic = msg.topic;\nvar regex = /^v3\\/smartparking\\/devices\\/(.+)\\/up$/;\nvar match = regex.exec(topic);\n\nif (match && match.length > 1) {\n    var device_id = match[1];\n\n    if (msg.payload.end_device_ids &&\n        (device_id !== msg.payload.end_device_ids.device_id ||\n        device_id === null)\n    ) {\n        node.warn(\"Device_id = \" + device_id);\n        device_id = msg.payload.end_device_ids.device_id;\n    }\n} else {\n    node.warn(\"Nu s-a putut extrage device_id din topic.\");\n}\n\n// Return relevant data\nmsg.payload = {\n    device_id,\n    ...msg.payload\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -571,7 +458,8 @@
         "y": 780,
         "wires": [
             [
-                "67f027761ec6fa44"
+                "67f027761ec6fa44",
+                "24be6ead0b36b68d"
             ]
         ]
     },
@@ -590,6 +478,42 @@
         "statusType": "auto",
         "x": 550,
         "y": 720,
+        "wires": []
+    },
+    {
+        "id": "24be6ead0b36b68d",
+        "type": "function",
+        "z": "af2032c9eba36021",
+        "name": "function 1",
+        "func": "var deviceSet = new Set();\n\ndeviceSet.add(msg.payload.device_id);\n\nmsg.payload = Array.from(deviceSet);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 120,
+        "wires": [
+            [
+                "89d52bc3a86e1d1b"
+            ]
+        ]
+    },
+    {
+        "id": "89d52bc3a86e1d1b",
+        "type": "debug",
+        "z": "af2032c9eba36021",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 120,
         "wires": []
     }
 ]
