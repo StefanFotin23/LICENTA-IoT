@@ -161,17 +161,24 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "http://localhost:8080/api/v1/{deviceToken}/telemetry",
+        "paytoqs": "body",
+        "url": "http://licenta_w-mytb-1:9090/api/v1/xCpcnXElA42g5zX1UurG/telemetry",
         "tls": "",
-        "persist": false,
+        "persist": true,
         "proxy": "",
         "insecureHTTPParser": false,
         "authType": "",
         "senderr": false,
-        "headers": [],
-        "x": 1010,
-        "y": 380,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Content-Type",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 950,
+        "y": 120,
         "wires": [
             [
                 "25fe5a10e9004d52"
@@ -183,15 +190,15 @@
         "type": "debug",
         "z": "af2032c9eba36021",
         "name": "debug 1",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1260,
-        "y": 380,
+        "x": 1200,
+        "y": 120,
         "wires": []
     },
     {
@@ -216,7 +223,7 @@
         "type": "function",
         "z": "af2032c9eba36021",
         "name": "elsys-decoder",
-        "func": "const TYPE_TEMP = 0x01; //temp 2 bytes -3276.8°C -->3276.7°C\nconst TYPE_RH = 0x02; //Humidity 1 byte  0-100%\nconst TYPE_ACC = 0x03; //acceleration 3 bytes X,Y,Z -128 --> 127 +/-63=1G\nconst TYPE_LIGHT = 0x04; //Light 2 bytes 0-->65535 Lux\nconst TYPE_MOTION = 0x05; //No of motion 1 byte  0-255\nconst TYPE_CO2 = 0x06; //Co2 2 bytes 0-65535 ppm\nconst TYPE_VDD = 0x07; //VDD 2byte 0-65535mV\nconst TYPE_ANALOG1 = 0x08; //VDD 2byte 0-65535mV\nconst TYPE_GPS = 0x09; //3bytes lat 3bytes long binary\nconst TYPE_PULSE1 = 0x0A; //2bytes relative pulse count\nconst TYPE_PULSE1_ABS = 0x0B; //4bytes no 0->0xFFFFFFFF\nconst TYPE_EXT_TEMP1 = 0x0C; //2bytes -3276.5C-->3276.5C\nconst TYPE_EXT_DIGITAL = 0x0D; //1bytes value 1 or 0\nconst TYPE_EXT_DISTANCE = 0x0E; //2bytes distance in mm\nconst TYPE_ACC_MOTION = 0x0F; //1byte number of vibration/motion\nconst TYPE_IR_TEMP = 0x10; //2bytes internal temp 2bytes external temp -3276.5C-->3276.5C\nconst TYPE_OCCUPANCY = 0x11; //1byte data\nconst TYPE_WATERLEAK = 0x12; //1byte data 0-255\nconst TYPE_GRIDEYE = 0x13; //65byte temperature data 1byte ref+64byte external temp\nconst TYPE_PRESSURE = 0x14; //4byte pressure data (hPa)\nconst TYPE_SOUND = 0x15; //2byte sound data (peak/avg)\nconst TYPE_PULSE2 = 0x16; //2bytes 0-->0xFFFF\nconst TYPE_PULSE2_ABS = 0x17; //4bytes no 0->0xFFFFFFFF\nconst TYPE_ANALOG2 = 0x18; //2bytes voltage in mV\nconst TYPE_EXT_TEMP2 = 0x19; //2bytes -3276.5C-->3276.5C\nconst TYPE_EXT_DIGITAL2 = 0x1A; // 1bytes value 1 or 0\nconst TYPE_EXT_ANALOG_UV = 0x1B; // 4 bytes signed int (uV)\nconst TYPE_TVOC = 0x1C; // 2 bytes (ppb)\nconst TYPE_DEBUG = 0x3D; // 4bytes debug\n\nfunction bin16dec(bin) {\n    var num = bin & 0xFFFF;\n    if (0x8000 & num)\n        num = -(0x010000 - num);\n    return num;\n}\n\nfunction bin8dec(bin) {\n    var num = bin & 0xFF;\n    if (0x80 & num)\n        num = -(0x0100 - num);\n    return num;\n}\n\nfunction hexToBytes(hex) {\n    for (var bytes = [], c = 0; c < hex.length; c += 2)\n        bytes.push(parseInt(hex.substr(c, 2), 16));\n    return bytes;\n}\n\nfunction DecodeElsysPayload(data) {\n    var obj = new Object();\n    for (let i = 0; i < data.length; i++) {\n        //console.log(data[i]);\n        switch (data[i]) {\n            case TYPE_TEMP: //Temperature\n                var temp = (data[i + 1] << 8) | (data[i + 2]);\n                temp = bin16dec(temp);\n                obj.temperature = temp / 10;\n                i += 2;\n                break\n            case TYPE_RH: //Humidity\n                var rh = (data[i + 1]);\n                obj.humidity = rh;\n                i += 1;\n                break\n            case TYPE_ACC: //Acceleration\n                obj.x = bin8dec(data[i + 1]);\n                obj.y = bin8dec(data[i + 2]);\n                obj.z = bin8dec(data[i + 3]);\n                i += 3;\n                break\n            case TYPE_LIGHT: //Light\n                obj.light = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_MOTION: //Motion sensor(PIR)\n                obj.motion = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_CO2: //CO2\n                obj.co2 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_VDD: //Battery level\n                obj.vdd = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_ANALOG1: //Analog input 1\n                obj.analog1 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_GPS: //gps\n                i++;\n                obj.lat = (data[i + 0] | data[i + 1] << 8 | data[i + 2] << 16 | (data[i + 2] & 0x80 ? 0xFF << 24 : 0)) / 10000;\n                obj.long = (data[i + 3] | data[i + 4] << 8 | data[i + 5] << 16 | (data[i + 5] & 0x80 ? 0xFF << 24 : 0)) / 10000;\n                i += 5;\n                break\n            case TYPE_PULSE1: //Pulse input 1\n                obj.pulse1 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_PULSE1_ABS: //Pulse input 1 absolute value\n                var pulseAbs = (data[i + 1] << 24) | (data[i + 2] << 16) | (data[i + 3] << 8) | (data[i + 4]);\n                obj.pulseAbs = pulseAbs;\n                i += 4;\n                break\n            case TYPE_EXT_TEMP1: //External temp\n                var temp = (data[i + 1] << 8) | (data[i + 2]);\n                temp = bin16dec(temp);\n                obj.externalTemperature = temp / 10;\n                i += 2;\n                break\n            case TYPE_EXT_DIGITAL: //Digital input\n                obj.digital = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_EXT_DISTANCE: //Distance sensor input\n                obj.distance = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_ACC_MOTION: //Acc motion\n                obj.accMotion = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_IR_TEMP: //IR temperature\n                var iTemp = (data[i + 1] << 8) | (data[i + 2]);\n                iTemp = bin16dec(iTemp);\n                var eTemp = (data[i + 3] << 8) | (data[i + 4]);\n                eTemp = bin16dec(eTemp);\n                obj.irInternalTemperature = iTemp / 10;\n                obj.irExternalTemperature = eTemp / 10;\n                i += 4;\n                break\n            case TYPE_OCCUPANCY: //Body occupancy\n                obj.occupancy = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_WATERLEAK: //Water leak\n                obj.waterleak = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_GRIDEYE: //Grideye data\n                var ref = data[i + 1];\n                i++;\n                obj.grideye = [];\n                for (var j = 0; j < 64; j++) {\n                    obj.grideye[j] = ref + (data[1 + i + j] / 10.0);\n                }\n                i += 64;\n                break\n            case TYPE_PRESSURE: //External Pressure\n                var temp = (data[i + 1] << 24) | (data[i + 2] << 16) | (data[i + 3] << 8) | (data[i + 4]);\n                obj.pressure = temp / 1000;\n                i += 4;\n                break\n            case TYPE_SOUND: //Sound\n                obj.soundPeak = data[i + 1];\n                obj.soundAvg = data[i + 2];\n                i += 2;\n                break\n            case TYPE_PULSE2: //Pulse 2\n                obj.pulse2 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_PULSE2_ABS: //Pulse input 2 absolute value\n                obj.pulseAbs2 = (data[i + 1] << 24) | (data[i + 2] << 16) | (data[i + 3] << 8) | (data[i + 4]);\n                i += 4;\n                break\n            case TYPE_ANALOG2: //Analog input 2\n                obj.analog2 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_EXT_TEMP2: //External temp 2\n                var temp = (data[i + 1] << 8) | (data[i + 2]);\n                temp = bin16dec(temp);\n                if (typeof obj.externalTemperature2 === \"number\") {\n                    obj.externalTemperature2 = [obj.externalTemperature2];\n                }\n                if (typeof obj.externalTemperature2 === \"object\") {\n                    obj.externalTemperature2.push(temp / 10);\n                } else {\n                    obj.externalTemperature2 = temp / 10;\n                }\n                i += 2;\n                break\n            case TYPE_EXT_DIGITAL2: //Digital input 2\n                obj.digital2 = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_EXT_ANALOG_UV: //Load cell analog uV\n                obj.analogUv = (data[i + 1] << 24) | (data[i + 2] << 16) | (data[i + 3] << 8) | (data[i + 4]);\n                i += 4;\n                break\n            case TYPE_TVOC:\n                obj.tvoc = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            default: //somthing is wrong with data\n                i = data.length;\n                break\n        }\n    }\n    return obj;\n}\n\nfunction base64ToHexArray(base64String) {\n    // Decode the Base64 string\n    var binaryString = Buffer.from(base64String, 'base64').toString('binary');\n    \n    // Convert the binary string to a hexadecimal array\n    var hexArray = [];\n    for (var i = 0; i < binaryString.length; i++) {\n        var hexChar = ('0' + binaryString.charCodeAt(i).toString(16)).slice(-2);\n        hexArray.push('0x' + hexChar);\n    }\n    \n    return hexArray;\n}\n\n// Get decoded data\nvar data = msg.payload.uplink_message.frm_payload;\n\ndata = base64ToHexArray(data);\ndata = data.map(hexString => parseInt(hexString, 16));\n\nmsg.payload = DecodeElsysPayload(data);\n\n// Get device_id\nvar topic = msg.topic;\nvar regex = /^v3\\/elsys\\/devices\\/(.+)\\/up$/;\nvar match = regex.exec(topic);\n\nif (match && match.length > 1) {\n    var device_id = match[1];\n\n    if (msg.payload.end_device_ids &&\n        (device_id !== msg.payload.end_device_ids.device_id ||\n        device_id === null)\n    ) {\n        node.warn(\"Device_id = \" + device_id);\n        device_id = msg.payload.end_device_ids.device_id;\n    }\n} else {\n    node.warn(\"Nu s-a putut extrage device_id din topic.\");\n}\n\n// Return relevant data\nmsg.payload = {\n    device_id,\n    ...msg.payload,\n}\n\nreturn msg;",
+        "func": "const TYPE_TEMP = 0x01; //temp 2 bytes -3276.8°C -->3276.7°C\nconst TYPE_RH = 0x02; //Humidity 1 byte  0-100%\nconst TYPE_ACC = 0x03; //acceleration 3 bytes X,Y,Z -128 --> 127 +/-63=1G\nconst TYPE_LIGHT = 0x04; //Light 2 bytes 0-->65535 Lux\nconst TYPE_MOTION = 0x05; //No of motion 1 byte  0-255\nconst TYPE_CO2 = 0x06; //Co2 2 bytes 0-65535 ppm\nconst TYPE_VDD = 0x07; //VDD 2byte 0-65535mV\nconst TYPE_ANALOG1 = 0x08; //VDD 2byte 0-65535mV\nconst TYPE_GPS = 0x09; //3bytes lat 3bytes long binary\nconst TYPE_PULSE1 = 0x0A; //2bytes relative pulse count\nconst TYPE_PULSE1_ABS = 0x0B; //4bytes no 0->0xFFFFFFFF\nconst TYPE_EXT_TEMP1 = 0x0C; //2bytes -3276.5C-->3276.5C\nconst TYPE_EXT_DIGITAL = 0x0D; //1bytes value 1 or 0\nconst TYPE_EXT_DISTANCE = 0x0E; //2bytes distance in mm\nconst TYPE_ACC_MOTION = 0x0F; //1byte number of vibration/motion\nconst TYPE_IR_TEMP = 0x10; //2bytes internal temp 2bytes external temp -3276.5C-->3276.5C\nconst TYPE_OCCUPANCY = 0x11; //1byte data\nconst TYPE_WATERLEAK = 0x12; //1byte data 0-255\nconst TYPE_GRIDEYE = 0x13; //65byte temperature data 1byte ref+64byte external temp\nconst TYPE_PRESSURE = 0x14; //4byte pressure data (hPa)\nconst TYPE_SOUND = 0x15; //2byte sound data (peak/avg)\nconst TYPE_PULSE2 = 0x16; //2bytes 0-->0xFFFF\nconst TYPE_PULSE2_ABS = 0x17; //4bytes no 0->0xFFFFFFFF\nconst TYPE_ANALOG2 = 0x18; //2bytes voltage in mV\nconst TYPE_EXT_TEMP2 = 0x19; //2bytes -3276.5C-->3276.5C\nconst TYPE_EXT_DIGITAL2 = 0x1A; // 1bytes value 1 or 0\nconst TYPE_EXT_ANALOG_UV = 0x1B; // 4 bytes signed int (uV)\nconst TYPE_TVOC = 0x1C; // 2 bytes (ppb)\nconst TYPE_DEBUG = 0x3D; // 4bytes debug\n\nfunction bin16dec(bin) {\n    var num = bin & 0xFFFF;\n    if (0x8000 & num)\n        num = -(0x010000 - num);\n    return num;\n}\n\nfunction bin8dec(bin) {\n    var num = bin & 0xFF;\n    if (0x80 & num)\n        num = -(0x0100 - num);\n    return num;\n}\n\nfunction hexToBytes(hex) {\n    for (var bytes = [], c = 0; c < hex.length; c += 2)\n        bytes.push(parseInt(hex.substr(c, 2), 16));\n    return bytes;\n}\n\nfunction DecodeElsysPayload(data) {\n    var obj = new Object();\n    for (let i = 0; i < data.length; i++) {\n        //console.log(data[i]);\n        switch (data[i]) {\n            case TYPE_TEMP: //Temperature\n                var temp = (data[i + 1] << 8) | (data[i + 2]);\n                temp = bin16dec(temp);\n                obj.temperature = temp / 10;\n                i += 2;\n                break\n            case TYPE_RH: //Humidity\n                var rh = (data[i + 1]);\n                obj.humidity = rh;\n                i += 1;\n                break\n            case TYPE_ACC: //Acceleration\n                obj.x = bin8dec(data[i + 1]);\n                obj.y = bin8dec(data[i + 2]);\n                obj.z = bin8dec(data[i + 3]);\n                i += 3;\n                break\n            case TYPE_LIGHT: //Light\n                obj.light = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_MOTION: //Motion sensor(PIR)\n                obj.motion = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_CO2: //CO2\n                obj.co2 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_VDD: //Battery level\n                obj.vdd = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_ANALOG1: //Analog input 1\n                obj.analog1 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_GPS: //gps\n                i++;\n                obj.lat = (data[i + 0] | data[i + 1] << 8 | data[i + 2] << 16 | (data[i + 2] & 0x80 ? 0xFF << 24 : 0)) / 10000;\n                obj.long = (data[i + 3] | data[i + 4] << 8 | data[i + 5] << 16 | (data[i + 5] & 0x80 ? 0xFF << 24 : 0)) / 10000;\n                i += 5;\n                break\n            case TYPE_PULSE1: //Pulse input 1\n                obj.pulse1 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_PULSE1_ABS: //Pulse input 1 absolute value\n                var pulseAbs = (data[i + 1] << 24) | (data[i + 2] << 16) | (data[i + 3] << 8) | (data[i + 4]);\n                obj.pulseAbs = pulseAbs;\n                i += 4;\n                break\n            case TYPE_EXT_TEMP1: //External temp\n                var temp = (data[i + 1] << 8) | (data[i + 2]);\n                temp = bin16dec(temp);\n                obj.externalTemperature = temp / 10;\n                i += 2;\n                break\n            case TYPE_EXT_DIGITAL: //Digital input\n                obj.digital = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_EXT_DISTANCE: //Distance sensor input\n                obj.distance = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_ACC_MOTION: //Acc motion\n                obj.accMotion = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_IR_TEMP: //IR temperature\n                var iTemp = (data[i + 1] << 8) | (data[i + 2]);\n                iTemp = bin16dec(iTemp);\n                var eTemp = (data[i + 3] << 8) | (data[i + 4]);\n                eTemp = bin16dec(eTemp);\n                obj.irInternalTemperature = iTemp / 10;\n                obj.irExternalTemperature = eTemp / 10;\n                i += 4;\n                break\n            case TYPE_OCCUPANCY: //Body occupancy\n                obj.occupancy = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_WATERLEAK: //Water leak\n                obj.waterleak = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_GRIDEYE: //Grideye data\n                var ref = data[i + 1];\n                i++;\n                obj.grideye = [];\n                for (var j = 0; j < 64; j++) {\n                    obj.grideye[j] = ref + (data[1 + i + j] / 10.0);\n                }\n                i += 64;\n                break\n            case TYPE_PRESSURE: //External Pressure\n                var temp = (data[i + 1] << 24) | (data[i + 2] << 16) | (data[i + 3] << 8) | (data[i + 4]);\n                obj.pressure = temp / 1000;\n                i += 4;\n                break\n            case TYPE_SOUND: //Sound\n                obj.soundPeak = data[i + 1];\n                obj.soundAvg = data[i + 2];\n                i += 2;\n                break\n            case TYPE_PULSE2: //Pulse 2\n                obj.pulse2 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_PULSE2_ABS: //Pulse input 2 absolute value\n                obj.pulseAbs2 = (data[i + 1] << 24) | (data[i + 2] << 16) | (data[i + 3] << 8) | (data[i + 4]);\n                i += 4;\n                break\n            case TYPE_ANALOG2: //Analog input 2\n                obj.analog2 = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            case TYPE_EXT_TEMP2: //External temp 2\n                var temp = (data[i + 1] << 8) | (data[i + 2]);\n                temp = bin16dec(temp);\n                if (typeof obj.externalTemperature2 === \"number\") {\n                    obj.externalTemperature2 = [obj.externalTemperature2];\n                }\n                if (typeof obj.externalTemperature2 === \"object\") {\n                    obj.externalTemperature2.push(temp / 10);\n                } else {\n                    obj.externalTemperature2 = temp / 10;\n                }\n                i += 2;\n                break\n            case TYPE_EXT_DIGITAL2: //Digital input 2\n                obj.digital2 = (data[i + 1]);\n                i += 1;\n                break\n            case TYPE_EXT_ANALOG_UV: //Load cell analog uV\n                obj.analogUv = (data[i + 1] << 24) | (data[i + 2] << 16) | (data[i + 3] << 8) | (data[i + 4]);\n                i += 4;\n                break\n            case TYPE_TVOC:\n                obj.tvoc = (data[i + 1] << 8) | (data[i + 2]);\n                i += 2;\n                break\n            default: //somthing is wrong with data\n                i = data.length;\n                break\n        }\n    }\n    return obj;\n}\n\nfunction base64ToHexArray(base64String) {\n    // Decode the Base64 string\n    var binaryString = Buffer.from(base64String, 'base64').toString('binary');\n    \n    // Convert the binary string to a hexadecimal array\n    var hexArray = [];\n    for (var i = 0; i < binaryString.length; i++) {\n        var hexChar = ('0' + binaryString.charCodeAt(i).toString(16)).slice(-2);\n        hexArray.push('0x' + hexChar);\n    }\n    \n    return hexArray;\n}\n\n// Get decoded data\nvar data = msg.payload.uplink_message.frm_payload;\n\ndata = base64ToHexArray(data);\ndata = data.map(hexString => parseInt(hexString, 16));\n\nmsg.payload = DecodeElsysPayload(data);\n\n// Get device_id\nvar topic = msg.topic;\nvar regex = /^v3\\/elsys\\/devices\\/(.+)\\/up$/;\nvar match = regex.exec(topic);\n\nif (match && match.length > 1) {\n    var device_id = match[1];\n\n    if (msg.payload.end_device_ids &&\n        (device_id !== msg.payload.end_device_ids.device_id ||\n        device_id === null)\n    ) {\n        node.warn(\"Device_id = \" + device_id);\n        device_id = msg.payload.end_device_ids.device_id;\n    }\n} else {\n    node.warn(\"Nu s-a putut extrage device_id din topic.\");\n}\n\n// Return relevant data\nmsg.payload = {\n    device_id: device_id,\n    data: msg.payload\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -228,7 +235,7 @@
         "wires": [
             [
                 "0d49be8d17bb1328",
-                "24be6ead0b36b68d"
+                "7a310c1fd9108704"
             ]
         ]
     },
@@ -304,8 +311,7 @@
         "y": 340,
         "wires": [
             [
-                "8fe4292a3e79d3e0",
-                "24be6ead0b36b68d"
+                "8fe4292a3e79d3e0"
             ]
         ]
     },
@@ -314,7 +320,7 @@
         "type": "debug",
         "z": "af2032c9eba36021",
         "name": "libelium-decoded-payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -381,8 +387,7 @@
         "y": 560,
         "wires": [
             [
-                "ad2723eaf08c5864",
-                "24be6ead0b36b68d"
+                "ad2723eaf08c5864"
             ]
         ]
     },
@@ -391,7 +396,7 @@
         "type": "debug",
         "z": "af2032c9eba36021",
         "name": "libelium-axtr-decoded-payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -458,8 +463,7 @@
         "y": 780,
         "wires": [
             [
-                "67f027761ec6fa44",
-                "24be6ead0b36b68d"
+                "67f027761ec6fa44"
             ]
         ]
     },
@@ -468,7 +472,7 @@
         "type": "debug",
         "z": "af2032c9eba36021",
         "name": "smartparking-decoded-payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -478,42 +482,6 @@
         "statusType": "auto",
         "x": 550,
         "y": 720,
-        "wires": []
-    },
-    {
-        "id": "24be6ead0b36b68d",
-        "type": "function",
-        "z": "af2032c9eba36021",
-        "name": "function 1",
-        "func": "var deviceSet = new Set();\n\ndeviceSet.add(msg.payload.device_id);\n\nmsg.payload = Array.from(deviceSet);\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 960,
-        "y": 120,
-        "wires": [
-            [
-                "89d52bc3a86e1d1b"
-            ]
-        ]
-    },
-    {
-        "id": "89d52bc3a86e1d1b",
-        "type": "debug",
-        "z": "af2032c9eba36021",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1120,
-        "y": 120,
         "wires": []
     }
 ]

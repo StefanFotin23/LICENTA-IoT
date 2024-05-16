@@ -2,3 +2,8 @@ Comenzi utile:
 
 docker compose start mytb
 docker compose stop mytb
+
+
+Node-Red ==> http://localhost:1880/
+
+Thingsboard ==> http://localhost:8080/ ====> Tenant Administrator: tenant@thingsboard.org / tenant
