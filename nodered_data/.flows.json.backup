@@ -162,7 +162,7 @@
         "method": "POST",
         "ret": "txt",
         "paytoqs": "body",
-        "url": "http://licenta_w-mytb-1:9090/api/v1/xCpcnXElA42g5zX1UurG/telemetry",
+        "url": "",
         "tls": "",
         "persist": true,
         "proxy": "",
@@ -177,29 +177,13 @@
                 "valueValue": "application/json"
             }
         ],
-        "x": 950,
-        "y": 120,
+        "x": 970,
+        "y": 320,
         "wires": [
             [
-                "25fe5a10e9004d52"
+                "725759200a8d4933"
             ]
         ]
-    },
-    {
-        "id": "25fe5a10e9004d52",
-        "type": "debug",
-        "z": "af2032c9eba36021",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1200,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "ea15c2c58d18b485",
@@ -230,12 +214,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
+        "x": 520,
         "y": 120,
         "wires": [
             [
                 "0d49be8d17bb1328",
-                "7a310c1fd9108704"
+                "83581f532572ad43"
             ]
         ]
     },
@@ -244,7 +228,7 @@
         "type": "debug",
         "z": "af2032c9eba36021",
         "name": "elsys-decoded-payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -252,7 +236,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
+        "x": 490,
         "y": 60,
         "wires": []
     },
@@ -270,7 +254,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 90,
-        "y": 340,
+        "y": 260,
         "wires": [
             [
                 "33e1aaf1e8257425",
@@ -292,7 +276,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 140,
-        "y": 280,
+        "y": 200,
         "wires": []
     },
     {
@@ -300,18 +284,19 @@
         "type": "function",
         "z": "af2032c9eba36021",
         "name": "libelium-decoder",
-        "func": "flow.set(\"wasp_sensors\", [{ id: 0, type: 2, ascii: \"CO\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 1, type: 2, ascii: \"CO2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 2, type: 2, ascii: \"O2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 3, type: 2, ascii: \"CH4\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 4, type: 2, ascii: \"O3\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 5, type: 2, ascii: \"NH3\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 6, type: 2, ascii: \"NO2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 7, type: 2, ascii: \"LPG\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 8, type: 2, ascii: \"AP1\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 9, type: 2, ascii: \"AP2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 10, type: 2, ascii: \"SV\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 11, type: 2, ascii: \"VOC\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 12, type: 2, ascii: \"NO\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 13, type: 2, ascii: \"CL2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 14, type: 2, ascii: \"ETO\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 15, type: 2, ascii: \"H2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 16, type: 2, ascii: \"H2S\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 17, type: 2, ascii: \"HCL\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 18, type: 2, ascii: \"HCN\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 19, type: 2, ascii: \"PH3\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 20, type: 2, ascii: \"SO2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 21, type: 2, ascii: \"NOISE\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 22, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 23, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 24, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 25, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 26, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 27, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 28, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 29, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 30, type: 2, ascii: \"GP_A\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 31, type: 2, ascii: \"GP_B\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 32, type: 2, ascii: \"GP_C\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 33, type: 2, ascii: \"\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 34, type: 2, ascii: \"\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 35, type: 2, ascii: \"GP_F\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 36, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 37, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 38, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 39, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 40, type: 2, ascii: \"WF\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 41, type: 0, ascii: \"PIR\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 42, type: 0, ascii: \"LP\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 43, type: 0, ascii: \"LL\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 44, type: 0, ascii: \"HALL\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 45, type: 0, ascii: \"RIN\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 46, type: 0, ascii: \"ROUT\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 47, type: 0, ascii: \"EV_A\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 48, type: 0, ascii: \"EV_C\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 49, type: 0, ascii: \"EV_D\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 50, type: 0, ascii: \"EV_E\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 51, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 52, type: 0, ascii: \"BAT\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 53, type: 2, ascii: \"GPS\", type_str: \"double\", no_fields: 2, precision: 6 }, { id: 54, type: 1, ascii: \"RSSI\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 55, type: 3, ascii: \"MAC\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 56, type: 3, ascii: \"NA\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 57, type: 3, ascii: \"NID\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 58, type: 0, ascii: \"DATE\", type_str: \"uint8_t\", no_fields: 3, precision: 0 }, { id: 59, type: 0, ascii: \"TIME\", type_str: \"uint8_t\", no_fields: 3, precision: 0 }, { id: 60, type: 1, ascii: \"GMT\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 61, type: 1, ascii: \"RAM\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 62, type: 2, ascii: \"IN_TEMP\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 63, type: 1, ascii: \"ACC\", type_str: \"int\", no_fields: 3, precision: 0 }, { id: 64, type: 4, ascii: \"MILLIS\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 65, type: 3, ascii: \"STR\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 66, type: 3, ascii: \"\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 67, type: 3, ascii: \"\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 68, type: 3, ascii: \"UID\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 69, type: 3, ascii: \"RB\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 70, type: 2, ascii: \"PM1\", type_str: \"double\", no_fields: 1, precision: 4 }, { id: 71, type: 2, ascii: \"PM2_5\", type_str: \"double\", no_fields: 1, precision: 4 }, { id: 72, type: 2, ascii: \"PM10\", type_str: \"double\", no_fields: 1, precision: 4 }, { id: 73, type: 4, ascii: \"PART\", type_str: \"uint32_t\", no_fields: 2, precision: 0 }, { id: 74, type: 2, ascii: \"TC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 75, type: 2, ascii: \"TF\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 76, type: 2, ascii: \"HUM\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 77, type: 2, ascii: \"PRES\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 78, type: 4, ascii: \"LUX\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 79, type: 1, ascii: \"US\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 80, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 81, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 82, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 83, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 84, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 85, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 86, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 87, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 88, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 89, type: 3, ascii: \"SPEED_OG\", type_str: \"char*\", no_fields: 1, precision: 2 }, { id: 90, type: 3, ascii: \"COURSE_OG\", type_str: \"char*\", no_fields: 1, precision: 2 }, { id: 91, type: 3, ascii: \"ALT\", type_str: \"char*\", no_fields: 1, precision: 2 }, { id: 92, type: 2, ascii: \"HDOP\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 93, type: 2, ascii: \"VDOP\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 94, type: 2, ascii: \"PDOP\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 95, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 96, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 97, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 98, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 99, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 100, type: 2, ascii: \"SWICA\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 101, type: 2, ascii: \"SWIFL\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 102, type: 2, ascii: \"SWIFB\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 103, type: 2, ascii: \"SWINO3\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 104, type: 2, ascii: \"SWIBR\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 105, type: 2, ascii: \"SWICL\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 106, type: 2, ascii: \"SWICU\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 107, type: 2, ascii: \"SWIIO\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 108, type: 2, ascii: \"SWINH4\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 109, type: 2, ascii: \"SWIAG\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 110, type: 2, ascii: \"SWIPH\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 111, type: 2, ascii: \"SWILI\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 112, type: 2, ascii: \"SWIMG\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 113, type: 2, ascii: \"SWINO2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 114, type: 2, ascii: \"SWICLO4\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 115, type: 2, ascii: \"SWIK\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 116, type: 2, ascii: \"SWINA\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 117, type: 2, ascii: \"SWI_A\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 118, type: 2, ascii: \"SWI_B\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 119, type: 2, ascii: \"SWI_C\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 120, type: 2, ascii: \"SWI_D\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 121, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 3 }, { id: 122, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 3 }, { id: 123, type: 4, ascii: \"TST\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 124, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 125, type: 0, ascii: \"VAPI\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 126, type: 0, ascii: \"VPROG\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 127, type: 0, ascii: \"VBOOT\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 128, type: 0, ascii: \"PS\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 129, type: 2, ascii: \"RAD\", type_str: \"double\", no_fields: 1, precision: 6 }, { id: 130, type: 2, ascii: \"PH\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 131, type: 2, ascii: \"ORP\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 132, type: 2, ascii: \"DO\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 133, type: 2, ascii: \"COND\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 134, type: 2, ascii: \"WT\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 135, type: 2, ascii: \"TURB\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 136, type: 2, ascii: \"PH_A\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 137, type: 2, ascii: \"PH_E\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 138, type: 2, ascii: \"ORP_A\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 139, type: 2, ascii: \"ORP_E\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 140, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 141, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 142, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 143, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 144, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 145, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 146, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 147, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 148, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 149, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 150, type: 2, ascii: \"SOIL1\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 151, type: 2, ascii: \"SOIL2\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 152, type: 2, ascii: \"SOIL3\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 153, type: 2, ascii: \"SOILTC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 154, type: 2, ascii: \"SOILTF\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 155, type: 2, ascii: \"LW\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 156, type: 2, ascii: \"ANE\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 157, type: 0, ascii: \"WV\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 158, type: 2, ascii: \"PLV1\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 159, type: 2, ascii: \"PLV2\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 160, type: 2, ascii: \"PLV3\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 161, type: 2, ascii: \"PAR\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 162, type: 2, ascii: \"UV\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 163, type: 2, ascii: \"TD\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 164, type: 2, ascii: \"SD\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 165, type: 2, ascii: \"FD\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 166, type: 2, ascii: \"SOIL_B\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 167, type: 2, ascii: \"SOIL_C\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 168, type: 2, ascii: \"SOIL_E\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 169, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 170, type: 2, ascii: \"TCB\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 171, type: 2, ascii: \"HUMB\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 172, type: 2, ascii: \"LUM\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 173, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 174, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 175, type: 2, ascii: \"CUR_A\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 176, type: 2, ascii: \"CUR_B\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 177, type: 2, ascii: \"CUR_C\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 178, type: 2, ascii: \"CUR_D\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 179, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 180, type: 1, ascii: \"MB_COILS\", type_str: \"int\", no_fields: 2, precision: 0 }, { id: 181, type: 1, ascii: \"MB_DI\", type_str: \"int\", no_fields: 2, precision: 0 }, { id: 182, type: 1, ascii: \"MB_HR\", type_str: \"int\", no_fields: 3, precision: 0 }, { id: 183, type: 1, ascii: \"MB_IR\", type_str: \"int\", no_fields: 3, precision: 0 }, { id: 184, type: 1, ascii: \"CB_RPM\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 185, type: 1, ascii: \"CB_VS\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 186, type: 1, ascii: \"CB_FR\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 187, type: 0, ascii: \"CB_FL\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 188, type: 0, ascii: \"CB_TP\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 189, type: 1, ascii: \"CB_FP\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 190, type: 1, ascii: \"PM_BIN\", type_str: \"int\", no_fields: 24, precision: 0 }, { id: 191, type: 1, ascii: \"PM_BINL\", type_str: \"int\", no_fields: 16, precision: 0 }, { id: 192, type: 1, ascii: \"PM_BINH\", type_str: \"int\", no_fields: 8, precision: 0 }, { id: 193, type: 2, ascii: \"USER_TC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 194, type: 2, ascii: \"AIR_TC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 195, type: 2, ascii: \"SI4B1_TC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 196, type: 4, ascii: \"COUNTER\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 197, type: 4, ascii: \"FEVER_COUNTER\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 198, type: 2, ascii: \"THRESHOLD\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 199, type: 0, ascii: \"RESULT\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }])\n\nfunction readString(buffer, offset) {\n    const len = buffer.readUint8(offset)\n    return buffer.slice(offset, offset + len).toString('ascii')\n}\n\nfunction getStringSize(buffer, offset) {\n    const len = buffer.readUint8(offset)\n    return len\n}\n\nfunction parse_tiny_wasp(payload, base) {\n    const wasp_sensors = flow.get('wasp_sensors')\n    const buff = Buffer.from(payload, base)\n    //node.warn(buff)\n    buff.readString = (offset) => readString(buff, offset);\n    buff.getStringSize = (offset) => getStringSize(buff, offset)\n    const seq = buff.readUint8();\n    const len = buff.byteLength;\n    let offset = 2\n    let data = {}\n    while (offset < len) {\n        const sensor_id = buff.readUint8(offset)\n        //node.warn(\"Sensor ID = \" + sensor_id);\n        offset += 1\n        const sensor = wasp_sensors[sensor_id]\n        let parser = null;\n        let sizeof_element = 0\n        switch (sensor.type) {\n            case 0: // uint8\n                parser = (read_offset) => buff.readUint8(read_offset)\n                sizeof_element = 1;\n                break;\n            case 1: // int\n                parser = (read_offset) => buff.readInt16LE(read_offset)\n                sizeof_element = 2\n                break;\n            case 2: // double\n                parser = (read_offset) => buff.readFloatLE(read_offset)\n                sizeof_element = 4\n                break;\n            case 3: // string (no multiple string supported)\n                parser = (read_offset) => buff.readString(read_offset)\n                sizeof_element = buff.getStringSize(offset)\n                break;\n            case 4: // uint32\n                parser = (read_offset) => buff.readUint32LE(read_offset)\n                sizeof_element = 4\n                break;\n        }\n        let new_data = {}\n        if (sensor.no_fields == 1) {\n            new_data[sensor.ascii] = parser(offset)\n            offset += sizeof_element\n        } else {\n            for (let i = 0; i < sensor.no_fields; i++) {\n                let value_name = sensor.ascii + i;\n                new_data[value_name] = parser(offset)\n                offset += sizeof_element\n            }\n        }\n\n        data = { ...data, ...new_data }\n    }\n    return data\n}\n\n// Get decoded data\nvar data = msg.payload.uplink_message.frm_payload;\nmsg.payload = parse_tiny_wasp(data, 'base64');\n\n// Get device_id\nvar topic = msg.topic;\nvar regex = /^v3\\/libelium\\/devices\\/(.+)\\/up$/;\nvar match = regex.exec(topic);\n\nif (match && match.length > 1) {\n    var device_id = match[1];\n\n    if (msg.payload.end_device_ids &&\n        (device_id !== msg.payload.end_device_ids.device_id ||\n        device_id === null)\n    ) {\n        node.warn(\"Device_id = \" + device_id);\n        device_id = msg.payload.end_device_ids.device_id;\n    }\n} else {\n    node.warn(\"Nu s-a putut extrage device_id din topic.\");\n}\n\n// Return relevant data\nmsg.payload = {\n    device_id,\n    ...msg.payload\n}\n\nreturn msg;",
+        "func": "flow.set(\"wasp_sensors\", [{ id: 0, type: 2, ascii: \"CO\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 1, type: 2, ascii: \"CO2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 2, type: 2, ascii: \"O2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 3, type: 2, ascii: \"CH4\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 4, type: 2, ascii: \"O3\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 5, type: 2, ascii: \"NH3\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 6, type: 2, ascii: \"NO2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 7, type: 2, ascii: \"LPG\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 8, type: 2, ascii: \"AP1\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 9, type: 2, ascii: \"AP2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 10, type: 2, ascii: \"SV\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 11, type: 2, ascii: \"VOC\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 12, type: 2, ascii: \"NO\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 13, type: 2, ascii: \"CL2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 14, type: 2, ascii: \"ETO\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 15, type: 2, ascii: \"H2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 16, type: 2, ascii: \"H2S\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 17, type: 2, ascii: \"HCL\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 18, type: 2, ascii: \"HCN\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 19, type: 2, ascii: \"PH3\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 20, type: 2, ascii: \"SO2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 21, type: 2, ascii: \"NOISE\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 22, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 23, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 24, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 25, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 26, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 27, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 28, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 29, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 30, type: 2, ascii: \"GP_A\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 31, type: 2, ascii: \"GP_B\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 32, type: 2, ascii: \"GP_C\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 33, type: 2, ascii: \"\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 34, type: 2, ascii: \"\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 35, type: 2, ascii: \"GP_F\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 36, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 37, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 38, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 39, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 40, type: 2, ascii: \"WF\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 41, type: 0, ascii: \"PIR\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 42, type: 0, ascii: \"LP\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 43, type: 0, ascii: \"LL\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 44, type: 0, ascii: \"HALL\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 45, type: 0, ascii: \"RIN\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 46, type: 0, ascii: \"ROUT\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 47, type: 0, ascii: \"EV_A\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 48, type: 0, ascii: \"EV_C\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 49, type: 0, ascii: \"EV_D\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 50, type: 0, ascii: \"EV_E\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 51, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 52, type: 0, ascii: \"BAT\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 53, type: 2, ascii: \"GPS\", type_str: \"double\", no_fields: 2, precision: 6 }, { id: 54, type: 1, ascii: \"RSSI\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 55, type: 3, ascii: \"MAC\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 56, type: 3, ascii: \"NA\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 57, type: 3, ascii: \"NID\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 58, type: 0, ascii: \"DATE\", type_str: \"uint8_t\", no_fields: 3, precision: 0 }, { id: 59, type: 0, ascii: \"TIME\", type_str: \"uint8_t\", no_fields: 3, precision: 0 }, { id: 60, type: 1, ascii: \"GMT\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 61, type: 1, ascii: \"RAM\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 62, type: 2, ascii: \"IN_TEMP\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 63, type: 1, ascii: \"ACC\", type_str: \"int\", no_fields: 3, precision: 0 }, { id: 64, type: 4, ascii: \"MILLIS\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 65, type: 3, ascii: \"STR\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 66, type: 3, ascii: \"\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 67, type: 3, ascii: \"\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 68, type: 3, ascii: \"UID\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 69, type: 3, ascii: \"RB\", type_str: \"char*\", no_fields: 1, precision: 0 }, { id: 70, type: 2, ascii: \"PM1\", type_str: \"double\", no_fields: 1, precision: 4 }, { id: 71, type: 2, ascii: \"PM2_5\", type_str: \"double\", no_fields: 1, precision: 4 }, { id: 72, type: 2, ascii: \"PM10\", type_str: \"double\", no_fields: 1, precision: 4 }, { id: 73, type: 4, ascii: \"PART\", type_str: \"uint32_t\", no_fields: 2, precision: 0 }, { id: 74, type: 2, ascii: \"TC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 75, type: 2, ascii: \"TF\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 76, type: 2, ascii: \"HUM\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 77, type: 2, ascii: \"PRES\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 78, type: 4, ascii: \"LUX\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 79, type: 1, ascii: \"US\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 80, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 81, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 82, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 83, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 84, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 85, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 86, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 87, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 88, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 89, type: 3, ascii: \"SPEED_OG\", type_str: \"char*\", no_fields: 1, precision: 2 }, { id: 90, type: 3, ascii: \"COURSE_OG\", type_str: \"char*\", no_fields: 1, precision: 2 }, { id: 91, type: 3, ascii: \"ALT\", type_str: \"char*\", no_fields: 1, precision: 2 }, { id: 92, type: 2, ascii: \"HDOP\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 93, type: 2, ascii: \"VDOP\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 94, type: 2, ascii: \"PDOP\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 95, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 96, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 97, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 98, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 99, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 100, type: 2, ascii: \"SWICA\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 101, type: 2, ascii: \"SWIFL\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 102, type: 2, ascii: \"SWIFB\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 103, type: 2, ascii: \"SWINO3\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 104, type: 2, ascii: \"SWIBR\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 105, type: 2, ascii: \"SWICL\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 106, type: 2, ascii: \"SWICU\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 107, type: 2, ascii: \"SWIIO\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 108, type: 2, ascii: \"SWINH4\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 109, type: 2, ascii: \"SWIAG\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 110, type: 2, ascii: \"SWIPH\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 111, type: 2, ascii: \"SWILI\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 112, type: 2, ascii: \"SWIMG\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 113, type: 2, ascii: \"SWINO2\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 114, type: 2, ascii: \"SWICLO4\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 115, type: 2, ascii: \"SWIK\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 116, type: 2, ascii: \"SWINA\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 117, type: 2, ascii: \"SWI_A\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 118, type: 2, ascii: \"SWI_B\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 119, type: 2, ascii: \"SWI_C\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 120, type: 2, ascii: \"SWI_D\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 121, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 3 }, { id: 122, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 3 }, { id: 123, type: 4, ascii: \"TST\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 124, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 125, type: 0, ascii: \"VAPI\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 126, type: 0, ascii: \"VPROG\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 127, type: 0, ascii: \"VBOOT\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 128, type: 0, ascii: \"PS\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 129, type: 2, ascii: \"RAD\", type_str: \"double\", no_fields: 1, precision: 6 }, { id: 130, type: 2, ascii: \"PH\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 131, type: 2, ascii: \"ORP\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 132, type: 2, ascii: \"DO\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 133, type: 2, ascii: \"COND\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 134, type: 2, ascii: \"WT\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 135, type: 2, ascii: \"TURB\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 136, type: 2, ascii: \"PH_A\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 137, type: 2, ascii: \"PH_E\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 138, type: 2, ascii: \"ORP_A\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 139, type: 2, ascii: \"ORP_E\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 140, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 141, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 142, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 143, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 144, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 145, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 146, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 147, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 148, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 149, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 150, type: 2, ascii: \"SOIL1\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 151, type: 2, ascii: \"SOIL2\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 152, type: 2, ascii: \"SOIL3\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 153, type: 2, ascii: \"SOILTC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 154, type: 2, ascii: \"SOILTF\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 155, type: 2, ascii: \"LW\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 156, type: 2, ascii: \"ANE\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 157, type: 0, ascii: \"WV\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 158, type: 2, ascii: \"PLV1\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 159, type: 2, ascii: \"PLV2\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 160, type: 2, ascii: \"PLV3\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 161, type: 2, ascii: \"PAR\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 162, type: 2, ascii: \"UV\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 163, type: 2, ascii: \"TD\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 164, type: 2, ascii: \"SD\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 165, type: 2, ascii: \"FD\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 166, type: 2, ascii: \"SOIL_B\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 167, type: 2, ascii: \"SOIL_C\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 168, type: 2, ascii: \"SOIL_E\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 169, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 170, type: 2, ascii: \"TCB\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 171, type: 2, ascii: \"HUMB\", type_str: \"double\", no_fields: 1, precision: 1 }, { id: 172, type: 2, ascii: \"LUM\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 173, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 174, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 175, type: 2, ascii: \"CUR_A\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 176, type: 2, ascii: \"CUR_B\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 177, type: 2, ascii: \"CUR_C\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 178, type: 2, ascii: \"CUR_D\", type_str: \"double\", no_fields: 1, precision: 3 }, { id: 179, type: 0, ascii: \"\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 180, type: 1, ascii: \"MB_COILS\", type_str: \"int\", no_fields: 2, precision: 0 }, { id: 181, type: 1, ascii: \"MB_DI\", type_str: \"int\", no_fields: 2, precision: 0 }, { id: 182, type: 1, ascii: \"MB_HR\", type_str: \"int\", no_fields: 3, precision: 0 }, { id: 183, type: 1, ascii: \"MB_IR\", type_str: \"int\", no_fields: 3, precision: 0 }, { id: 184, type: 1, ascii: \"CB_RPM\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 185, type: 1, ascii: \"CB_VS\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 186, type: 1, ascii: \"CB_FR\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 187, type: 0, ascii: \"CB_FL\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 188, type: 0, ascii: \"CB_TP\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }, { id: 189, type: 1, ascii: \"CB_FP\", type_str: \"int\", no_fields: 1, precision: 0 }, { id: 190, type: 1, ascii: \"PM_BIN\", type_str: \"int\", no_fields: 24, precision: 0 }, { id: 191, type: 1, ascii: \"PM_BINL\", type_str: \"int\", no_fields: 16, precision: 0 }, { id: 192, type: 1, ascii: \"PM_BINH\", type_str: \"int\", no_fields: 8, precision: 0 }, { id: 193, type: 2, ascii: \"USER_TC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 194, type: 2, ascii: \"AIR_TC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 195, type: 2, ascii: \"SI4B1_TC\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 196, type: 4, ascii: \"COUNTER\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 197, type: 4, ascii: \"FEVER_COUNTER\", type_str: \"uint32_t\", no_fields: 1, precision: 0 }, { id: 198, type: 2, ascii: \"THRESHOLD\", type_str: \"double\", no_fields: 1, precision: 2 }, { id: 199, type: 0, ascii: \"RESULT\", type_str: \"uint8_t\", no_fields: 1, precision: 0 }])\n\nfunction readString(buffer, offset) {\n    const len = buffer.readUint8(offset)\n    return buffer.slice(offset, offset + len).toString('ascii')\n}\n\nfunction getStringSize(buffer, offset) {\n    const len = buffer.readUint8(offset)\n    return len\n}\n\nfunction parse_tiny_wasp(payload, base) {\n    const wasp_sensors = flow.get('wasp_sensors')\n    const buff = Buffer.from(payload, base)\n    //node.warn(buff)\n    buff.readString = (offset) => readString(buff, offset);\n    buff.getStringSize = (offset) => getStringSize(buff, offset)\n    const seq = buff.readUint8();\n    const len = buff.byteLength;\n    let offset = 2\n    let data = {}\n    while (offset < len) {\n        const sensor_id = buff.readUint8(offset)\n        //node.warn(\"Sensor ID = \" + sensor_id);\n        offset += 1\n        const sensor = wasp_sensors[sensor_id]\n        let parser = null;\n        let sizeof_element = 0\n        switch (sensor.type) {\n            case 0: // uint8\n                parser = (read_offset) => buff.readUint8(read_offset)\n                sizeof_element = 1;\n                break;\n            case 1: // int\n                parser = (read_offset) => buff.readInt16LE(read_offset)\n                sizeof_element = 2\n                break;\n            case 2: // double\n                parser = (read_offset) => buff.readFloatLE(read_offset)\n                sizeof_element = 4\n                break;\n            case 3: // string (no multiple string supported)\n                parser = (read_offset) => buff.readString(read_offset)\n                sizeof_element = buff.getStringSize(offset)\n                break;\n            case 4: // uint32\n                parser = (read_offset) => buff.readUint32LE(read_offset)\n                sizeof_element = 4\n                break;\n        }\n        let new_data = {}\n        if (sensor.no_fields == 1) {\n            new_data[sensor.ascii] = parser(offset)\n            offset += sizeof_element\n        } else {\n            for (let i = 0; i < sensor.no_fields; i++) {\n                let value_name = sensor.ascii + i;\n                new_data[value_name] = parser(offset)\n                offset += sizeof_element\n            }\n        }\n\n        data = { ...data, ...new_data }\n    }\n    return data\n}\n\n// Get decoded data\nvar data = msg.payload.uplink_message.frm_payload;\nmsg.payload = parse_tiny_wasp(data, 'base64');\n\n// Get device_id\nvar topic = msg.topic;\nvar regex = /^v3\\/libelium\\/devices\\/(.+)\\/up$/;\nvar match = regex.exec(topic);\n\nif (match && match.length > 1) {\n    var device_id = match[1];\n\n    if (msg.payload.end_device_ids &&\n        (device_id !== msg.payload.end_device_ids.device_id ||\n        device_id === null)\n    ) {\n        node.warn(\"Device_id = \" + device_id);\n        device_id = msg.payload.end_device_ids.device_id;\n    }\n} else {\n    node.warn(\"Nu s-a putut extrage device_id din topic.\");\n}\n\n// Return relevant data\nmsg.payload = {\n    device_id: device_id,\n    data: msg.payload\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
-        "y": 340,
+        "x": 520,
+        "y": 260,
         "wires": [
             [
-                "8fe4292a3e79d3e0"
+                "8fe4292a3e79d3e0",
+                "83581f532572ad43"
             ]
         ]
     },
@@ -328,8 +313,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 280,
+        "x": 490,
+        "y": 200,
         "wires": []
     },
     {
@@ -346,7 +331,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 110,
-        "y": 560,
+        "y": 400,
         "wires": [
             [
                 "442fc1998bd275a0",
@@ -368,7 +353,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 150,
-        "y": 500,
+        "y": 340,
         "wires": []
     },
     {
@@ -383,11 +368,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 560,
+        "x": 500,
+        "y": 400,
         "wires": [
             [
-                "ad2723eaf08c5864"
+                "ad2723eaf08c5864",
+                "83581f532572ad43"
             ]
         ]
     },
@@ -404,8 +390,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 550,
-        "y": 500,
+        "x": 470,
+        "y": 340,
         "wires": []
     },
     {
@@ -422,7 +408,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 110,
-        "y": 780,
+        "y": 540,
         "wires": [
             [
                 "bbcca26c68f9ca4b",
@@ -444,7 +430,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 150,
-        "y": 720,
+        "y": 480,
         "wires": []
     },
     {
@@ -452,18 +438,19 @@
         "type": "function",
         "z": "af2032c9eba36021",
         "name": "smartparking-decoder",
-        "func": "function decode_smart_parking(payload, base) {\n    const buff = Buffer.from(payload, base)\n    const first_nibble_bin = ((buff[0] & 0xF0) >> 4).toString(2).padStart(4, '0')\n    let header_data = {\n        'parking_slot_status': Number(first_nibble_bin[0]),\n        'battery_state': Number(first_nibble_bin[1]),\n        'ack': Number(first_nibble_bin[2]),\n        'recalibration': Number(first_nibble_bin[3]),\n        'frame_type': (buff[0] & 0x0F),\n        'sequence': buff.readUint8(1),\n    }\n\n    let frame_data;\n\n    switch (header_data['frame_type']) {\n        case 0:\n            frame_data = {\n                'radar_error': buff.readUint8(2),\n                'temperature': buff.readInt8(3),\n                'timestamp_hh': buff.readInt8(4),\n                'timestamp_mm': buff.readUint8(5),\n                'd1': buff.readUint16BE(6),\n                'a1': buff.readUint16BE(8),\n                'n_reflections': buff.readUint8(10)\n            }\n            break;\n        case 1:\n        case 7:\n            frame_data = {\n                'radar_error': buff.readUint8(2),\n                'temperature': buff.readInt8(3),\n                'timestamp_hh': buff.readUint8(4),\n                'timestamp_mm': buff.readUint8(5),\n                'd1': buff.readUint16BE(6),\n                'a1': buff.readUint16BE(8),\n                'battery_raw': buff.readUint8(10),\n                'battery': buff.readUint8(10) * 4 + 2800,\n            }\n            break\n        case 4:\n            frame_data = {\n                'firmware_version': buff.readUint8(2),\n                'battery_raw': buff.readUint8(3),\n                'battery': buff.readUint8(3) * 4 + 2800,\n                'radar_threshold': buff.readUint8(4),\n                'radar_range_start': buff.readUint8(5),\n                'radar_range_length': buff.readUint8(6),\n            }\n            break;\n        case 5:\n            frame_data = {\n                'time_sleep_min': buff.readUint8(2),\n                'time_sleep_secs': buff.readUint8(3),\n                'time_keep_alive': buff.readUint8(4),\n                'nm_mode': buff.readUint8(5),\n                'nm_start_hour': buff.readUint8(6),\n                'nm_duration': buff.readUint8(7),\n                'nm_sleep_time': buff.readUint8(8),\n                'nm_keep_alive': buff.readUint8(9),\n            }\n            break;\n        case 2:\n            frame_data = {\n                'flag_rtc': buff.readUint8(4)\n            }\n    }\n\n    if (header_data['frame_type'] === 4 || header_data['frame_type'] === 5) {\n        header_data['parking_slot_status'] = null;\n    }\n\n    return {\n        'header_data': header_data,\n        'frame_data': frame_data\n    }\n}\n\n// Get decoded data\nvar data = msg.payload.uplink_message.frm_payload;\nmsg.payload = decode_smart_parking(data, 'base64');\n\n// Get device_id\nvar topic = msg.topic;\nvar regex = /^v3\\/smartparking\\/devices\\/(.+)\\/up$/;\nvar match = regex.exec(topic);\n\nif (match && match.length > 1) {\n    var device_id = match[1];\n\n    if (msg.payload.end_device_ids &&\n        (device_id !== msg.payload.end_device_ids.device_id ||\n        device_id === null)\n    ) {\n        node.warn(\"Device_id = \" + device_id);\n        device_id = msg.payload.end_device_ids.device_id;\n    }\n} else {\n    node.warn(\"Nu s-a putut extrage device_id din topic.\");\n}\n\n// Return relevant data\nmsg.payload = {\n    device_id,\n    ...msg.payload\n}\n\nreturn msg;",
+        "func": "function decode_smart_parking(payload, base) {\n    const buff = Buffer.from(payload, base)\n    const first_nibble_bin = ((buff[0] & 0xF0) >> 4).toString(2).padStart(4, '0')\n    let header_data = {\n        'parking_slot_status': Number(first_nibble_bin[0]),\n        'battery_state': Number(first_nibble_bin[1]),\n        'ack': Number(first_nibble_bin[2]),\n        'recalibration': Number(first_nibble_bin[3]),\n        'frame_type': (buff[0] & 0x0F),\n        'sequence': buff.readUint8(1),\n    }\n\n    let frame_data;\n\n    switch (header_data['frame_type']) {\n        case 0:\n            frame_data = {\n                'radar_error': buff.readUint8(2),\n                'temperature': buff.readInt8(3),\n                'timestamp_hh': buff.readInt8(4),\n                'timestamp_mm': buff.readUint8(5),\n                'd1': buff.readUint16BE(6),\n                'a1': buff.readUint16BE(8),\n                'n_reflections': buff.readUint8(10)\n            }\n            break;\n        case 1:\n        case 7:\n            frame_data = {\n                'radar_error': buff.readUint8(2),\n                'temperature': buff.readInt8(3),\n                'timestamp_hh': buff.readUint8(4),\n                'timestamp_mm': buff.readUint8(5),\n                'd1': buff.readUint16BE(6),\n                'a1': buff.readUint16BE(8),\n                'battery_raw': buff.readUint8(10),\n                'battery': buff.readUint8(10) * 4 + 2800,\n            }\n            break\n        case 4:\n            frame_data = {\n                'firmware_version': buff.readUint8(2),\n                'battery_raw': buff.readUint8(3),\n                'battery': buff.readUint8(3) * 4 + 2800,\n                'radar_threshold': buff.readUint8(4),\n                'radar_range_start': buff.readUint8(5),\n                'radar_range_length': buff.readUint8(6),\n            }\n            break;\n        case 5:\n            frame_data = {\n                'time_sleep_min': buff.readUint8(2),\n                'time_sleep_secs': buff.readUint8(3),\n                'time_keep_alive': buff.readUint8(4),\n                'nm_mode': buff.readUint8(5),\n                'nm_start_hour': buff.readUint8(6),\n                'nm_duration': buff.readUint8(7),\n                'nm_sleep_time': buff.readUint8(8),\n                'nm_keep_alive': buff.readUint8(9),\n            }\n            break;\n        case 2:\n            frame_data = {\n                'flag_rtc': buff.readUint8(4)\n            }\n    }\n\n    if (header_data['frame_type'] === 4 || header_data['frame_type'] === 5) {\n        header_data['parking_slot_status'] = null;\n    }\n\n    return {\n        'header_data': header_data,\n        'frame_data': frame_data\n    }\n}\n\n// Get decoded data\nvar data = msg.payload.uplink_message.frm_payload;\nmsg.payload = decode_smart_parking(data, 'base64');\n\n// Get device_id\nvar topic = msg.topic;\nvar regex = /^v3\\/smartparking\\/devices\\/(.+)\\/up$/;\nvar match = regex.exec(topic);\n\nif (match && match.length > 1) {\n    var device_id = match[1];\n\n    if (msg.payload.end_device_ids &&\n        (device_id !== msg.payload.end_device_ids.device_id ||\n        device_id === null)\n    ) {\n        node.warn(\"Device_id = \" + device_id);\n        device_id = msg.payload.end_device_ids.device_id;\n    }\n} else {\n    node.warn(\"Nu s-a putut extrage device_id din topic.\");\n}\n\n// Return relevant data\nmsg.payload = {\n    device_id: device_id,\n    data: msg.payload\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 780,
+        "x": 500,
+        "y": 540,
         "wires": [
             [
-                "67f027761ec6fa44"
+                "67f027761ec6fa44",
+                "83581f532572ad43"
             ]
         ]
     },
@@ -480,8 +467,65 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 550,
-        "y": 720,
+        "x": 470,
+        "y": 480,
         "wires": []
+    },
+    {
+        "id": "83581f532572ad43",
+        "type": "function",
+        "z": "af2032c9eba36021",
+        "name": "Set telemetry URL",
+        "func": "// Extract token from message payload\nvar token = msg.payload.device_id;\n\n// Construct URL with token\nmsg.url = \"http://licenta-mytb-1:9090/api/v1/token_\" + token + \"/telemetry\";\n\n// Send only telemetry data\nmsg.payload = msg.payload.data\n\n// Return modified message object\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 320,
+        "wires": [
+            [
+                "7a310c1fd9108704"
+            ]
+        ]
+    },
+    {
+        "id": "1bec46696a1048e4",
+        "type": "debug",
+        "z": "af2032c9eba36021",
+        "name": "Telemetry status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "725759200a8d4933",
+        "type": "function",
+        "z": "af2032c9eba36021",
+        "name": "Filter non 200 status codes",
+        "func": "// Filter out messages with statusCode equal to 200\nif (msg.statusCode == 200) {\n    msg.payload = msg.topic + \" OK\";\n} else {\n    msg.payload = msg;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 320,
+        "wires": [
+            [
+                "1bec46696a1048e4"
+            ]
+        ]
     }
 ]

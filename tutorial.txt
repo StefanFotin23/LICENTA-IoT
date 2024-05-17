@@ -3,6 +3,7 @@ Comenzi utile:
 docker compose start mytb
 docker compose stop mytb
 
+Logs for ThingsBoard ==> docker compose logs -f mytb
 
 Node-Red ==> http://localhost:1880/
 
