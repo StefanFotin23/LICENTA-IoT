@@ -373,6 +373,9 @@ module.exports = {
      * for all available options.
      */
     editorTheme: {
+        // Add more if needed
+        suppressPropertyChanges: true,
+
         /** The following property can be used to set a custom theme for the editor.
          * See https://github.com/node-red-contrib-themes/theme-collection for
          * a collection of themes to chose from.

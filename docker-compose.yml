@@ -48,8 +48,7 @@ services:
       - "1880:1880"
     volumes:
       - ./nodered_data:/data
-    
-    
+
 volumes:
   mytb-data:
     external: true
