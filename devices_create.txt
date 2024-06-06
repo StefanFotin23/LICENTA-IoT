@@ -38,3 +38,4 @@ sp7,sp,token_sp7,smartparking
 sp8,sp,token_sp8,smartparking
 sp9,sp,token_sp9,smartparking
 sp10,sp,token_sp10,smartparking
+monitorization,stats,token_monitorization,msg_stats
