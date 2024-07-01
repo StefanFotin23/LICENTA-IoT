@@ -382,7 +382,7 @@
         "type": "debug",
         "z": "af2032c9eba36021",
         "name": "libelium-axtr-decoded-payload",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -476,7 +476,7 @@
         "type": "function",
         "z": "af2032c9eba36021",
         "name": "Set telemetry URL",
-        "func": "// Extract token from message payload\nvar token = msg.payload.device_id;\n\n// Construct URL with token\nmsg.url = \"http://licenta-mytb-1:9090/api/v1/token_\" + token + \"/telemetry\";\n\n// Send only telemetry data\nmsg.payload = msg.payload.data\n\n// Return modified message object\nreturn msg;\n",
+        "func": "// Retrieve the current counter value from global context\nvar msg_count = global.get(\"message_count\") || 0;\n\n// Increment the counter\nmsg_count += 1;\n\n// Save the updated counter value back to global context\nglobal.set(\"message_count\", msg_count);\n\n// Save msg_count to the JSON payload\nmsg.payload.data.msg_count = msg_count;\nmsg.payload.data.count = 1;\n\n// Extract token from message payload\nvar token = msg.payload.device_id;\n\n// Construct URL with token\nmsg.url = \"http://licenta-mytb-1:9090/api/v1/token_\" + token + \"/telemetry\";\n\n// Send only telemetry data\nmsg.payload = msg.payload.data\n\n// Return modified message object\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -541,7 +541,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "",
+        "crontab": "00 00 * * *",
         "once": true,
         "onceDelay": "0.1",
         "topic": "resetCounter",
@@ -589,7 +589,7 @@
             }
         ],
         "x": 1090,
-        "y": 740,
+        "y": 1040,
         "wires": [
             [
                 "a2053b591b4daf90"
@@ -601,7 +601,7 @@
         "type": "function",
         "z": "af2032c9eba36021",
         "name": "Parse CSV input data",
-        "func": "// Sample CSV data\nconst csvData = `name,type,access_token,label\ners-eye01,ers-eye,token_ers-eye01,elsys\ners-eye02,ers-eye,token_ers-eye02,elsys\ners-eye03,ers-eye,token_ers-eye03,elsys\ners-eye04,ers-eye,token_ers-eye04,elsys\ners-eye05,ers-eye,token_ers-eye05,elsys\ners-eye06,ers-eye,token_ers-eye06,elsys\ners-eye07,ers-eye,token_ers-eye07,elsys\ners-eye08,ers-eye,token_ers-eye08,elsys\ners-eye09,ers-eye,token_ers-eye09,elsys\ners-eye10,ers-eye,token_ers-eye10,elsys\ners-eye11,ers-eye,token_ers-eye11,elsys\ners-voc01,ers-voc,token_ers-voc01,elsys\ners-voc02,ers-voc,token_ers-voc02,elsys\ners-voc03,ers-voc,token_ers-voc03,elsys\ners-voc04,ers-voc,token_ers-voc04,elsys\ners-voc05,ers-voc,token_ers-voc05,elsys\ners-gas01,ers-gas,token_ers-gas01,elsys\ners-gas02,ers-gas,token_ers-gas02,elsys\ners-gas03,ers-gas,token_ers-gas03,elsys\ners-gas04,ers-gas,token_ers-gas04,elsys\ners-gas05,ers-gas,token_ers-gas05,elsys\ners-gas06,ers-gas,token_ers-gas06,elsys\nsap1,sap,token_sap1,libelium-sap\nsap2,sap,token_sap2,libelium-sap\nsap3,sap,token_sap3,libelium-sap\nsap4,sap,token_sap4,libelium-sap\nssec1,ssec,token_ssec1,libelium-ssec\nssec2,ssec,token_ssec2,libelium-ssec\nssec3,ssec,token_ssec3,libelium-ssec\nsp1,sp,token_sp1,smartparking\nsp2,sp,token_sp2,smartparking\nsp3,sp,token_sp3,smartparking\nsp4,sp,token_sp4,smartparking\nsp5,sp,token_sp5,smartparking\nsp6,sp,token_sp6,smartparking\nsp7,sp,token_sp7,smartparking\nsp8,sp,token_sp8,smartparking\nsp9,sp,token_sp9,smartparking\nsp10,sp,token_sp10,smartparking\nmonitorization,stats,token_monitorization,msg_stats`;\n\n// Save the Bearer token\nvar token = msg.payload;\ntoken = \"Bearer \" + JSON.parse(token).token;\nmsg.token = token;\n\n// Split the CSV data into lines\nconst lines = csvData.trim().split('\\n');\n\n// Extract the header line\nconst headers = lines[0].split(',');\n\n// Initialize an array to hold the JSON objects\nconst devices = [];\n\n// Iterate over the remaining lines and create JSON objects\nfor (let i = 1; i < lines.length; i++) {\n    const values = lines[i].split(',');\n    const device = {};\n    \n    // Create a JSON object using the headers as keys and the values as the data\n    for (let j = 0; j < headers.length; j++) {\n        device[headers[j]] = values[j];\n    }\n    \n    // Add the JSON object to the array\n    devices.push(device);\n}\n\n// Set the payload to the array of JSON objects\nmsg.payload = devices;\nreturn msg;",
+        "func": "// Sample CSV data\nconst csvData = `name,type,access_token,label\ners-eye01,ers-eye,token_ers-eye01,elsys\ners-eye02,ers-eye,token_ers-eye02,elsys\ners-eye03,ers-eye,token_ers-eye03,elsys\ners-eye04,ers-eye,token_ers-eye04,elsys\ners-eye05,ers-eye,token_ers-eye05,elsys\ners-eye06,ers-eye,token_ers-eye06,elsys\ners-eye07,ers-eye,token_ers-eye07,elsys\ners-eye08,ers-eye,token_ers-eye08,elsys\ners-eye09,ers-eye,token_ers-eye09,elsys\ners-eye10,ers-eye,token_ers-eye10,elsys\ners-eye11,ers-eye,token_ers-eye11,elsys\ners-voc01,ers-voc,token_ers-voc01,elsys\ners-voc02,ers-voc,token_ers-voc02,elsys\ners-voc03,ers-voc,token_ers-voc03,elsys\ners-voc04,ers-voc,token_ers-voc04,elsys\ners-voc05,ers-voc,token_ers-voc05,elsys\ners-gas01,ers-gas,token_ers-gas01,elsys\ners-gas02,ers-gas,token_ers-gas02,elsys\ners-gas03,ers-gas,token_ers-gas03,elsys\ners-gas04,ers-gas,token_ers-gas04,elsys\ners-gas05,ers-gas,token_ers-gas05,elsys\ners-gas06,ers-gas,token_ers-gas06,elsys\nsap1,sap,token_sap1,libelium-sap\nsap2,sap,token_sap2,libelium-sap\nsap3,sap,token_sap3,libelium-sap\nsap4,sap,token_sap4,libelium-sap\nssec1,ssec,token_ssec1,libelium-ssec\nssec2,ssec,token_ssec2,libelium-ssec\nssec3,ssec,token_ssec3,libelium-ssec\nsp1,sp,token_sp1,smartparking\nsp2,sp,token_sp2,smartparking\nsp3,sp,token_sp3,smartparking\nsp4,sp,token_sp4,smartparking\nsp5,sp,token_sp5,smartparking\nsp6,sp,token_sp6,smartparking\nsp7,sp,token_sp7,smartparking\nsp8,sp,token_sp8,smartparking\nsp9,sp,token_sp9,smartparking\nsp10,sp,token_sp10,smartparking\nmonitorization,stats,token_monitorization,msg_stats`;\n\n// Save the Bearer token\nvar token = msg.payload;\ntoken = \"Bearer \" + JSON.parse(token).token;\nglobal.set(\"bearer_token\", token);\nmsg.token = token;\n\n// Split the CSV data into lines\nconst lines = csvData.trim().split('\\n');\n\n// Extract the header line\nconst headers = lines[0].split(',');\n\n// Initialize an array to hold the JSON objects\nconst devices = [];\n\n// Iterate over the remaining lines and create JSON objects\nfor (let i = 1; i < lines.length; i++) {\n    const values = lines[i].split(',');\n    const device = {};\n    \n    // Create a JSON object using the headers as keys and the values as the data\n    for (let j = 0; j < headers.length; j++) {\n        device[headers[j]] = values[j];\n    }\n    \n    // Add the JSON object to the array\n    devices.push(device);\n}\n\n// Set the payload to the array of JSON objects\nmsg.payload = devices;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -609,7 +609,7 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 740,
+        "y": 1040,
         "wires": [
             [
                 "fe4d322122cc093f",
@@ -631,7 +631,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 400,
-        "y": 680,
+        "y": 980,
         "wires": []
     },
     {
@@ -646,7 +646,7 @@
         "stream": false,
         "addname": "",
         "x": 610,
-        "y": 740,
+        "y": 1040,
         "wires": [
             [
                 "e0cfdf23fc06fec1",
@@ -667,8 +667,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 650,
-        "y": 680,
+        "x": 610,
+        "y": 1100,
         "wires": []
     },
     {
@@ -683,8 +683,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 840,
-        "y": 740,
+        "x": 820,
+        "y": 1040,
         "wires": [
             [
                 "c3a675384d46a75e",
@@ -716,7 +716,7 @@
             }
         ],
         "x": 110,
-        "y": 740,
+        "y": 1040,
         "wires": [
             [
                 "5cb968f13cded8db",
@@ -738,7 +738,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 110,
-        "y": 800,
+        "y": 1100,
         "wires": []
     },
     {
@@ -754,7 +754,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 680,
+        "y": 980,
         "wires": [
             [
                 "57e4f4f594496c05"
@@ -774,8 +774,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1180,
-        "y": 620,
+        "x": 1100,
+        "y": 960,
         "wires": []
     },
     {
@@ -791,8 +791,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 880,
-        "y": 680,
+        "x": 820,
+        "y": 980,
         "wires": []
     },
     {
@@ -800,15 +800,15 @@
         "type": "function",
         "z": "af2032c9eba36021",
         "name": "Filter non 200 status codes",
-        "func": "// Filter out messages with statusCode equal to 200\nif (msg.statusCode == 200) {\n    msg = null;\n} else {\n    msg.payload = msg;\n}\n\nreturn msg;",
+        "func": "// Filter out messages with statusCode equal to 200\nif (msg.statusCode == 200) {\n    // Set monitorization device server attributes\n    if (msg.name === \"monitorization\") {\n        var device_id = JSON.parse(msg.payload).id.id;\n        global.set(\"monitorization_id\", device_id);\n    }\n\n    msg = null;\n} else {\n    msg.payload = msg;\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1160,
-        "y": 680,
+        "x": 1100,
+        "y": 1000,
         "wires": [
             [
                 "f55630f2708426c9"
@@ -850,8 +850,8 @@
                 "valueValue": "token"
             }
         ],
-        "x": 760,
-        "y": 920,
+        "x": 740,
+        "y": 1340,
         "wires": [
             [
                 "027eeff2b45a2d83"
@@ -870,8 +870,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 820,
+        "x": 420,
+        "y": 1240,
         "wires": [
             [
                 "915e6a0a72e386c5"
@@ -891,8 +891,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 810,
-        "y": 840,
+        "x": 790,
+        "y": 1240,
         "wires": []
     },
     {
@@ -907,8 +907,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
-        "y": 880,
+        "x": 780,
+        "y": 1300,
         "wires": [
             [
                 "437338fb72a3c9be"
@@ -920,7 +920,7 @@
         "type": "msg-counter",
         "z": "af2032c9eba36021",
         "name": "Telemetry Counter",
-        "x": 930,
+        "x": 770,
         "y": 540,
         "wires": [
             [
@@ -941,8 +941,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
-        "y": 480,
+        "x": 1060,
+        "y": 500,
         "wires": []
     },
     {
@@ -957,8 +957,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 860,
+        "x": 420,
+        "y": 1280,
         "wires": [
             [
                 "915e6a0a72e386c5"
@@ -977,8 +977,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 900,
+        "x": 420,
+        "y": 1320,
         "wires": [
             [
                 "915e6a0a72e386c5"
@@ -997,8 +997,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
-        "y": 940,
+        "x": 430,
+        "y": 1360,
         "wires": [
             [
                 "915e6a0a72e386c5"
@@ -1017,8 +1017,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
-        "y": 980,
+        "x": 430,
+        "y": 1400,
         "wires": [
             [
                 "915e6a0a72e386c5"
@@ -1037,8 +1037,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 1020,
+        "x": 440,
+        "y": 1440,
         "wires": [
             [
                 "915e6a0a72e386c5"
@@ -1057,7 +1057,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 150,
-        "y": 620,
+        "y": 920,
         "wires": [
             [
                 "aa791af979bc4456"
@@ -1076,7 +1076,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 130,
-        "y": 940,
+        "y": 1360,
         "wires": [
             [
                 "a46927c381a91d06",
@@ -1093,7 +1093,7 @@
         "type": "function",
         "z": "af2032c9eba36021",
         "name": "Initial Date",
-        "func": "// Obține timestamp-ul curent\nvar timestamp = Date.now();\n\n// Creează un obiect Date folosind timestamp-ul\nvar date = new Date(timestamp);\n\n// Obține componentele datei\nvar day = date.getDate();\nvar month = date.getMonth() + 1; // Lunile sunt indexate de la 0\nvar year = date.getFullYear();\n\nvar hours = date.getHours() + 3;\nvar minutes = date.getMinutes();\n\n// Adaugă un zero în față dacă ziua, luna, orele sau minutele sunt mai mici de 10\nif (day < 10) {\n    day = '0' + day;\n}\nif (month < 10) {\n    month = '0' + month;\n}\nif (hours < 10) {\n    hours = '0' + hours;\n}\nif (minutes < 10) {\n    minutes = '0' + minutes;\n}\n\n// Construiește stringul final\nvar formattedDate = day + '-' + month + '-' + year + ' ' + hours + ':' + minutes;\n\nglobal.set(\"date\", formattedDate);\nglobal.set(\"date_ms\", date);\n\nreturn msg;",
+        "func": "// Obține timestamp-ul curent\nvar timestamp = Date.now();\n\n// Verifică dacă există deja \"date_ms\" în contextul global\nvar date_ms = global.get(\"date_ms\");\n\n// Creează un obiect Date folosind \"date_ms\" existent sau timestamp-ul curent\nvar date = date_ms ? new Date(date_ms) : new Date(timestamp);\n\n// Obține componentele datei\nvar day = date.getDate();\nvar month = date.getMonth() + 1; // Lunile sunt indexate de la 0\nvar year = date.getFullYear();\n\nvar hours = date.getHours() + 3;\nvar minutes = date.getMinutes();\n\n// Adaugă un zero în față dacă ziua, luna, orele sau minutele sunt mai mici de 10\nif (day < 10) {\n    day = '0' + day;\n}\nif (month < 10) {\n    month = '0' + month;\n}\nif (hours < 10) {\n    hours = '0' + hours;\n}\nif (minutes < 10) {\n    minutes = '0' + minutes;\n}\n\n// Construiește stringul final\nvar formattedDate = day + '-' + month + '-' + year + ' ' + hours + ':' + minutes;\n\nglobal.set(\"date\", formattedDate);\nglobal.set(\"date_ms\", date);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1112,21 +1112,240 @@
         "id": "a40f2d1359124bfc",
         "type": "function",
         "z": "af2032c9eba36021",
-        "name": "Initial Date",
-        "func": "msg.date = global.get(\"date\");\nvar initialDateMs = global.get(\"date_ms\");\nvar messageCount = msg.count;\nvar currentDateMs = Date.now();\n\n// Calculate the elapsed time in hours and minutes\nvar elapsedTimeMs = currentDateMs - initialDateMs;\nvar elapsedTimeDays = elapsedTimeMs / (1000 * 60 * 60 * 24);\nvar elapsedTimeHours = elapsedTimeMs / (1000 * 60 * 60);\nvar elapsedTimeMinutes = elapsedTimeMs / (1000 * 60);\n\n// Calculate the message rates\nvar msgRateD = messageCount / elapsedTimeDays;\nvar msgRateH = messageCount / elapsedTimeHours;\nvar msgRateM = messageCount / elapsedTimeMinutes;\n\n// Attach the message rates to the message object\nmsg.msg_rate_h = msgRateH;\nmsg.msg_rate_m = msgRateM;\nmsg.msg_rate_d = msgRateD;\n\n// Construct URL with token\nvar token = 'monitorization';\nmsg.topic = token;\nmsg.url = \"http://licenta-mytb-1:9090/api/v1/token_\" + token + \"/telemetry\";\n\n// Send only telemetry data\nmsg.payload = {\n    \"msg_rate_h\": msg.msg_rate_h,\n    \"msg_rate_m\": msg.msg_rate_m,\n    \"msg_rate_d\": msg.msg_rate_d,\n    \"expected_count\": msg.count,\n    \"count\": 1\n};\n\nreturn msg;",
+        "name": "Process Monitorization Data",
+        "func": "msg.date = global.get(\"date\");\nvar initialDateMs = global.get(\"date_ms\");\nvar messageCount = global.get(\"message_count\");\nvar currentDateMs = Date.now();\n\n// Calculate the elapsed time in hours and minutes\nvar elapsedTimeMs = currentDateMs - initialDateMs;\nvar elapsedTimeDays = elapsedTimeMs / (1000 * 60 * 60 * 24);\nvar elapsedTimeHours = elapsedTimeMs / (1000 * 60 * 60);\nvar elapsedTimeMinutes = elapsedTimeMs / (1000 * 60);\n\n// Calculate the message rates\nvar msgRateD = messageCount / elapsedTimeDays;\nvar msgRateH = messageCount / elapsedTimeHours;\nvar msgRateM = messageCount / elapsedTimeMinutes;\n\n// Attach the message rates to the message object\nmsg.msg_rate_h = msgRateH;\nmsg.msg_rate_m = msgRateM;\nmsg.msg_rate_d = msgRateD;\n\n// Construct URL with token\nvar token = 'monitorization';\nmsg.topic = token;\nmsg.url = \"http://licenta-mytb-1:9090/api/v1/token_\" + token + \"/telemetry\";\n\n// Send only telemetry data\nmsg.payload = {\n    \"msg_rate_h\": msg.msg_rate_h,\n    \"msg_rate_m\": msg.msg_rate_m,\n    \"msg_rate_d\": msg.msg_rate_d,\n    \"expected_count\": messageCount,\n    \"refreshable_count\": msg.count,\n    \"count\": 1\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1210,
+        "x": 1060,
         "y": 540,
         "wires": [
             [
                 "897d948a39df8868",
-                "7a310c1fd9108704"
+                "7a310c1fd9108704",
+                "c741dcb0c7ceec79"
             ]
         ]
+    },
+    {
+        "id": "6df3febf1d2aab9a",
+        "type": "debug",
+        "z": "af2032c9eba36021",
+        "name": "Received Message Counter",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "c741dcb0c7ceec79",
+        "type": "function",
+        "z": "af2032c9eba36021",
+        "name": "Real Message Counter Function",
+        "func": "// Construct the combined message\nmsg.payload = \"Real message count: \" + msg.payload.expected_count;\n\n// Pass the message along\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 600,
+        "wires": [
+            [
+                "6df3febf1d2aab9a"
+            ]
+        ]
+    },
+    {
+        "id": "881971e08d55e9dc",
+        "type": "function",
+        "z": "af2032c9eba36021",
+        "name": "Set Monitorization Server Side Attributes",
+        "func": "var access_token = 'token_monitorization';\nvar deviceId = global.get(\"monitorization_id\");\n\nvar url = \"http://licenta-mytb-1:9090/api/plugins/telemetry/DEVICE/\" + deviceId + \"/SERVER_SCOPE?accessToken=\" + access_token;\n\nvar attributesPayload = {\n    \"realCount\": 0,\n    \"missedMessages\": 0\n};\n\n// Prepare the message for the HTTP request\nmsg.url = url;\nmsg.bearer_token = global.get(\"bearer_token\");\nmsg.payload = attributesPayload;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 700,
+        "wires": [
+            [
+                "3f958176c75d25c6"
+            ]
+        ]
+    },
+    {
+        "id": "e08a58afc97acde4",
+        "type": "debug",
+        "z": "af2032c9eba36021",
+        "name": "Set Monitorization Server Side Attributes",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "2bb039c2811b8a73",
+        "type": "inject",
+        "z": "af2032c9eba36021",
+        "name": "Set Monitorization Server Side Attributes",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 200,
+        "y": 700,
+        "wires": [
+            [
+                "881971e08d55e9dc"
+            ]
+        ]
+    },
+    {
+        "id": "3f958176c75d25c6",
+        "type": "http request",
+        "z": "af2032c9eba36021",
+        "name": "/api/device?accessToken",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            },
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            },
+            {
+                "keyType": "Authorization",
+                "keyValue": "",
+                "valueType": "msg",
+                "valueValue": "bearer_token"
+            }
+        ],
+        "x": 1070,
+        "y": 700,
+        "wires": [
+            [
+                "e08a58afc97acde4"
+            ]
+        ]
+    },
+    {
+        "id": "7c26e876f2574338",
+        "type": "inject",
+        "z": "af2032c9eba36021",
+        "name": "Reset Expected Count",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 140,
+        "y": 820,
+        "wires": [
+            [
+                "ed667b88699e872d"
+            ]
+        ]
+    },
+    {
+        "id": "ed667b88699e872d",
+        "type": "function",
+        "z": "af2032c9eba36021",
+        "name": "Reset message_count = 0",
+        "func": "// Set message_count = 0\nglobal.set(\"message_count\", 0);\n\n// Set date to NOW\nvar date = new Date(Date.now());\nglobal.set(\"date_ms\", date);\n\nmsg.payload = global.get(\"message_count\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 760,
+        "wires": [
+            [
+                "844f103fc1d60160"
+            ]
+        ]
+    },
+    {
+        "id": "500908ec925e9192",
+        "type": "inject",
+        "z": "af2032c9eba36021",
+        "name": "RESET GENERAL COUNTING !!!",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "resetCounter",
+        "x": 180,
+        "y": 760,
+        "wires": [
+            [
+                "ed667b88699e872d",
+                "881971e08d55e9dc",
+                "16b3554f678eba0d"
+            ]
+        ]
+    },
+    {
+        "id": "844f103fc1d60160",
+        "type": "debug",
+        "z": "af2032c9eba36021",
+        "name": "message_count",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 760,
+        "wires": []
     }
 ]

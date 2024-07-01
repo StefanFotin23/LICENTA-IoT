@@ -6,12 +6,36 @@
                 "view-store-position": false,
                 "view-show-grid": true,
                 "view-snap-grid": true,
-                "view-grid-size": 20,
+                "view-grid-size": "20",
                 "view-node-status": true,
                 "view-node-show-label": true,
                 "view-show-tips": true,
                 "view-show-welcome-tours": true
+            },
+            "tours": {
+                "welcome": "3.1.8"
             }
+        },
+        "debug": {
+            "filter": "filterSelected",
+            "filteredNodes": [
+                "5cb968f13cded8db",
+                "437338fb72a3c9be",
+                "9fe409fcbe18a638",
+                "f55630f2708426c9",
+                "0d49be8d17bb1328",
+                "ea15c2c58d18b485",
+                "442fc1998bd275a0",
+                "8fe4292a3e79d3e0",
+                "33e1aaf1e8257425",
+                "fe4d322122cc093f",
+                "6df3febf1d2aab9a",
+                "897d948a39df8868",
+                "67f027761ec6fa44",
+                "bbcca26c68f9ca4b",
+                "e0cfdf23fc06fec1",
+                "1bec46696a1048e4"
+            ]
         }
     }
 }

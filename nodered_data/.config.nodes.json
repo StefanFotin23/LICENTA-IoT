@@ -445,5 +445,24 @@
                 "file": "/data/node_modules/node-red-contrib-msg-counter/msg-counter.js"
             }
         }
+    },
+    "node-red-contrib-persistent-global-context": {
+        "name": "node-red-contrib-persistent-global-context",
+        "version": "1.0.5",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "persistent-global-context": {
+                "name": "persistent-global-context",
+                "types": [
+                    "persistent-global-context"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-persistent-global-context",
+                "file": "/data/node_modules/node-red-contrib-persistent-global-context/src/persistent-global-context.js"
+            }
+        }
     }
 }
